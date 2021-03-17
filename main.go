@@ -18,7 +18,7 @@ func main() {
     }
 
     chatId, err := strconv.Atoi(os.Getenv("TGCHATID")); if err != nil {
-        log.Fatal("missing or invalid CHATID environment variable")
+        log.Fatal("missing or invalid TGCHATID environment variable")
     }
 
     recipient := telebot.User{ID: chatId}
