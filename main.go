@@ -2,6 +2,7 @@ package main
 
 import (
     "fmt"
+    "flag"
     "os"
     "log"
     "strconv"
@@ -13,7 +14,14 @@ import (
     "net/url"
 )
 
+
 func checkErr(err error) {
+    if err != nil {
+        log.Fatal("something went wrong: ", err)
+    }
+}
+
+func checkReqErr(err error) {
     if err != nil {
         urlErr := err.(*url.Error)
         if urlErr.Timeout() {
@@ -40,32 +48,70 @@ func main() {
         log.Fatal("missing or invalid TGCHATID environment variable")
     }
 
+    flag.Usage = func() {
+        fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+        flag.PrintDefaults()
+    }
+
+    var msg string
+    flag.StringVar(&msg, "m", "", "the message to send")
+
+    var file string
+    flag.StringVar(&file, "f", "", "read message from given file")
+
+    flag.Parse()
+
     client := &http.Client {
         Timeout: 10 * time.Second,
     }
 
-    scanner := bufio.NewScanner(os.Stdin)
-    var sb strings.Builder
-    scanner.Scan()
-    sb.WriteString(scanner.Text())
-    for scanner.Scan() {
-        sb.WriteString("\n")
+    // check if command is run from pipe
+    fi, _ := os.Stdin.Stat()
+    if (fi.Mode() & os.ModeCharDevice) == 0 {
+
+        scanner := bufio.NewScanner(os.Stdin)
+        var sb strings.Builder
+        scanner.Scan()
         sb.WriteString(scanner.Text())
+        for scanner.Scan() {
+            sb.WriteString("\n")
+            sb.WriteString(scanner.Text())
+        }
+
+        msg = sb.String()
+
+    } else {
+
+        if len(msg) == 0 && len(file) == 0 {
+            flag.Usage()
+            log.Fatal("no message specified")
+        } else if len(msg) > 0 && len(file) > 0 {
+            flag.Usage()
+            log.Fatal("cannot specify both -m and -f flags at the same time")
+        } else if len(file) > 0 {
+            data, err := ioutil.ReadFile(file)
+            checkErr(err)
+            msg = string(data)
+        }
+
+        // no need to check for -m flag because that's the default
+
     }
+
 
     baseUrl := fmt.Sprintf("https://api.telegram.org/bot%s/", botToken)
 
     getMeUrl := baseUrl + "getMe"
     res, err := client.Get(getMeUrl)
-    checkErr(err)
+    checkReqErr(err)
     data, _ := ioutil.ReadAll(res.Body)
     res.Body.Close()
     checkOk(data)
 
     sendMessageUrl := baseUrl + "sendMessage"
-    reqBody := fmt.Sprintf("chat_id=%d&text=%s&parse_mode=MarkdownV2", chatId, sb.String())
+    reqBody := fmt.Sprintf("chat_id=%d&text=%s&parse_mode=MarkdownV2", chatId, msg)
     res, err = client.Post(sendMessageUrl, "application/x-www-form-urlencoded", strings.NewReader(reqBody))
-    checkErr(err)
+    checkReqErr(err)
     data, _ = ioutil.ReadAll(res.Body)
     res.Body.Close()
     checkOk(data)
