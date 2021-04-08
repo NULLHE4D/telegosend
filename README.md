@@ -10,7 +10,7 @@ A command-line tool written in Golang that simply sends a message from your [Tel
    * [Installation](#installation)
       * [Dependencies](#dependencies)
       * [Instructions](#instructions)
-   * [Gotcha(s)](#gotchas)
+   * [Gotchas](#gotchas)
    * [Links](#links)
    * [License](#license)
 
