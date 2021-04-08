@@ -57,7 +57,7 @@ func main() {
     flag.StringVar(&msg, "m", "", "the message to send")
 
     var file string
-    flag.StringVar(&file, "f", "", "read message from given file")
+    flag.StringVar(&file, "f", "", "file containing the message to send")
 
     flag.Parse()
 
