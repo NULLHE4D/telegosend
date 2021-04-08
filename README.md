@@ -40,7 +40,7 @@ tail --pid 1337 -f /dev/null; telegosend -f done-msg.txt
 
 Or maybe you want to get notified if a certain command exited with a non-zero exit code:
 ```
-./my-awesome-script.sh || telegosend -m "not so awesome afterall"
+./my-awesome-script.sh || telegosend -m "not so awesome after all"
 ```
 
 You can also specify the message to send via stdin:
