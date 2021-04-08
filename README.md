@@ -56,7 +56,7 @@ echo "Hello World!" | telegosend
 
 ### Instructions
 
-Assuming you have Go installed and configured, run the following command in a shell to download and install telegosend:
+Assuming you have [Go](https://golang.org/doc/install) installed and configured, run the following command in a shell to download and install telegosend:
 ```
 go get -v github.com/NULLHE4D/telegosend
 ```
