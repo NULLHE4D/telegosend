@@ -61,9 +61,10 @@ Assuming you have [Go](https://golang.org/doc/install) installed and configured,
 go get -v github.com/NULLHE4D/telegosend
 ```
 
-## Gotcha(s)
+## Gotchas
 
 * In case Telegram decides to change the behaviour or structure (unlikely) of their API, this tool may no longer work until it is updated accordingly.
+* Messages sent using telegosend are formatted in [MarkdownV2](https://core.telegram.org/bots/api#markdownv2-style).
 
 ## Links
 
