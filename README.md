@@ -18,7 +18,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ## Usage
 
-:warning: **Important: telegosend will read your [Telegram Bot Token](https://core.telegram.org/bots#3-how-do-i-create-a-bot) and [Chat ID](https://telegram.me/userinfobot) from the environment variables `TGBOTTOKEN` and `TGCHATID` respectively.**
+:warning: **IMPORTANT: telegosend will read your [Telegram Bot Token](https://core.telegram.org/bots#3-how-do-i-create-a-bot) and [Chat ID](https://telegram.me/userinfobot) from the environment variables `TGBOTTOKEN` and `TGCHATID` respectively.**
 
 ### Command line options
 
@@ -64,7 +64,7 @@ go get -v github.com/NULLHE4D/telegosend
 ## Gotchas
 
 * In case Telegram decides to change the behaviour or structure (unlikely) of their API, this tool may no longer work until it is updated accordingly.
-* Messages sent using telegosend are formatted in [MarkdownV2](https://core.telegram.org/bots/api#markdownv2-style).
+* Messages sent using telegosend are parsed as [MarkdownV2](https://core.telegram.org/bots/api#markdownv2-style).
 
 ## Links
 
