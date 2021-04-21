@@ -18,7 +18,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ## Usage
 
-:warning: **IMPORTANT: telegosend will read your [Telegram Bot Token](https://core.telegram.org/bots#3-how-do-i-create-a-bot) and [Chat ID](https://telegram.me/userinfobot) from the environment variables `TGBOTTOKEN` and `TGCHATID` respectively.**
+:warning: **IMPORTANT: telegosend will read your [Telegram Bot Token](https://core.telegram.org/bots#3-how-do-i-create-a-bot) and [Chat ID](https://telegram.me/userinfobot) from the environment variables `TG_BOT_TOKEN` and `TG_CHAT_ID` respectively.**
 
 ### Command line options
 

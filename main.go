@@ -40,12 +40,12 @@ func checkOk(data []byte) {
 
 func main() {
 
-    botToken := os.Getenv("TGBOTTOKEN"); if len(botToken) == 0 {
-        log.Fatal("missing TGBOTTOKEN environment variable")
+    botToken := os.Getenv("TG_BOT_TOKEN"); if len(botToken) == 0 {
+        log.Fatal("missing TG_BOT_TOKEN environment variable")
     }
 
-    chatId, err := strconv.Atoi(os.Getenv("TGCHATID")); if err != nil {
-        log.Fatal("missing or invalid TGCHATID environment variable")
+    chatId, err := strconv.Atoi(os.Getenv("TG_CHAT_ID")); if err != nil {
+        log.Fatal("missing or invalid TG_CHAT_ID environment variable")
     }
 
     flag.Usage = func() {
